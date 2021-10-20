@@ -5,33 +5,33 @@ class UsersData {
    function login(){
       if(isset($_POST['do_login'])){
           
-          if(empty($_POST['email']))
-          {
-              echo "pls enter email";
-              die();
-          }
-          
-          if(empty($_POST['password']))
-          {
-              echo "pls enter password";
-              die();
-          }
-      $email=$_POST['email'];
-      $password=$_POST['password'];
-      $result = $dbcon-> execute("SELECT * FROM `users` WHERE `email`='$email' and `password`='$password'", array());
-      $number_of_rows = $result->fetchColumn();
-      
-      if ($number_of_rows>0){
-          $_SESSION['email']=$email;
+        if(empty($_POST['email']))
+        {
+            echo "pls enter email";
+            die();
+        }
+        
+        if(empty($_POST['password']))
+        {
+            echo "pls enter password";
+            die();
+        }
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $result = $dbcon-> execute("SELECT * FROM `users` WHERE `email`='$email' and `password`='$password'", array());
+        $number_of_rows = $result->fetchAll();
+        
+      if ($number_of_rows > 0){
+          $_SESSION['email'] = $email;
           echo 'ok';
       }
       else{
           echo 'user doesnt exist';
       }
       exit();
-    }     ‏
-
+    } 
   }
+  
   function signup(){
       
       if(isset($_POST['do_signup'])){
@@ -69,7 +69,7 @@ class UsersData {
           
           if ($result){
               
-              $_SESSION['email']=$email;
+              $_SESSION['email'] = $email;
               echo 'ok';
           }
           else{
@@ -81,7 +81,6 @@ class UsersData {
           
           
       }
-      
       
   }
 
